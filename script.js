@@ -53,8 +53,12 @@ const newUser = (user) => {
   return template
 }
 // function for deleting a user.
-const deleteUser = (el) => {
-  el.parentElement.parentElement.remove();
+const deleteUser = (user) => {
+  let userId = user.parentNode.parentNode.id;
+  let uIndex = users.findIndex(x => x.id === userId);
+  users.splice(uIndex, 1);
+  user.parentElement.parentElement.remove();
+  console.log(users);
   
 }
 // function for editing a user
