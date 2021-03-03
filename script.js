@@ -61,34 +61,42 @@ const deleteUser = (user) => {
   console.log(users);
   
 }
+
+let userId;
+let uIndex;
 // function for editing a user
 const editUser = (user) => {
-  let userId = user.parentNode.parentNode.id;
-  let uIndex = users.findIndex(x => x.id === userId);
+  userId = user.parentNode.parentNode.id;
+  console.log("userid " + userId);
+  uIndex = users.findIndex(x => x.id === userId);
+  console.log("uindex utanför " + uIndex);
   firstName.value = users[uIndex].firstName;
   lastName.value = users[uIndex].lastName;
   email.value = users[uIndex].email;
   editbtn.classList.remove("no-see");
   addbtn.classList.add("no-see");
 
-  editbtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    if(firstName.value !== '' && lastName.value !== '' && email.value !== '') {
-      console.log(uIndex);
-      users[uIndex].firstName = firstName.value;
-      users[uIndex].lastName = lastName.value;
-      users[uIndex].email = email.value;
-      form.reset();
-      console.log(users);
-      editbtn.classList.add("no-see");
-      addbtn.classList.remove("no-see");
-      renderUsers();
-    }
-
-  })
+ 
 
   
 }
+
+editbtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  if(firstName.value !== '' && lastName.value !== '' && email.value !== '') {
+    console.log("uindex innanför " + uIndex);
+    users[uIndex].firstName = firstName.value;
+    users[uIndex].lastName = lastName.value;
+    users[uIndex].email = email.value;
+    form.reset();
+    console.log(users);
+    editbtn.classList.add("no-see");
+    addbtn.classList.remove("no-see");
+    renderUsers();
+  }
+
+})
+
 
 // validating form before creating a user.
 form.addEventListener('submit', e => {
